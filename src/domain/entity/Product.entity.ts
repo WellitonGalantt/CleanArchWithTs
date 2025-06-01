@@ -36,11 +36,18 @@ export class ProductEntity {
     }
 
     // Inegrar o id real criado com o banco de dados;
-    public static reHydrateId(data: PropsType): ProductEntity {
+    public reHydrateId(data: PropsType): ProductEntity {
         if (!data.id || data.id <= 0) {
             throw new DomainInvalidDataException('O id nao pode ser menor ou igual a 0!');
         }
         return new ProductEntity(data);
+    }
+
+    public get id(): number{
+        if(!this.props.id){
+            throw new DomainInvalidDataException('Id undefined!')
+        }
+        return this.props.id;
     }
 
     public get name(): string {
