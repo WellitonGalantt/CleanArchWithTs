@@ -30,6 +30,10 @@ export class CreatProductUsecase
         // Faz a persistencia e retorna a instancia com o id real; 
         const product = await this.productGateway.save(entity);
 
+        return this.presentOutput(product);
+    }
+
+    private presentOutput(product: ProductEntity): CreateUseCaseOutputDto {
         const output: CreateUseCaseOutputDto = {
             id: product.id
         }
