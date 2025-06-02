@@ -35,12 +35,12 @@ export class ProductEntity {
         });
     }
 
-    // Inegrar o id real criado com o banco de dados;
-    public reHydrateId(data: PropsType): ProductEntity {
-        if (!data.id || data.id <= 0) {
+    // Integrar o id real criado com o banco de dados;
+    public reHydrateId(id: number): ProductEntity {
+        if (!id || id <= 0) {
             throw new DomainInvalidDataException('O id nao pode ser menor ou igual a 0!');
         }
-        return new ProductEntity(data);
+        return new ProductEntity({ ...this.props, id});
     }
 
     public get id(): number{
