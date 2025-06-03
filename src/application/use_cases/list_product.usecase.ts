@@ -1,6 +1,6 @@
 import { ProductEntity } from "../../domain/entity/Product.entity";
 import { ProductGateway } from "../../domain/gateways/Product.gateway";
-import { UseCase } from "../use_case";
+import { UseCase } from "../use_case.contract";
 
 export type ListUsecaseInputDto = void;
 export type ListUsecaseOutputDto = {
@@ -22,10 +22,20 @@ export class ListProductUsecase
 
     public async execute(input: void): Promise<ListUsecaseOutputDto> {
         const products = await this.productGateway.list();
+        // console.log(products);
         return this.presentOutput(products);
+
     }
 
     private presentOutput(products: ProductEntity[]): ListUsecaseOutputDto {
-        return { products: products };
+        const productList = products.map((p: ProductEntity) => {
+            return {
+                id: p.id,
+                name: p.name,
+                price: p.price,
+                quantity: p.quantity
+            }
+        })
+        return { products: productList };
     }
 }

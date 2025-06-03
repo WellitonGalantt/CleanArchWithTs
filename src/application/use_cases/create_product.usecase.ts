@@ -1,6 +1,6 @@
 import { ProductEntity } from "../../domain/entity/Product.entity";
 import { ProductGateway } from "../../domain/gateways/Product.gateway";
-import { UseCase } from "../use_case"
+import { UseCase } from "../use_case.contract"
 
 export type CreateUseCaseInputDto = {
     name: string;
